@@ -73,5 +73,6 @@ view model =
     , Html.button [ onClick (SetThemeTo "monokai") ] [ Html.text "Set 'monokai' theme" ]
     , Html.button [ onClick (SetThemeTo "cobalt") ] [ Html.text "Set 'cobalt' theme" ]
     , Html.button [ onClick (SetThemeTo "ambiance") ] [ Html.text "Revert 'ambiance' theme" ]
+    , Html.button [ onClick (UpdateSource "Blank source") ] [ Html.text "Reset source" ]
     , Html.text model.source
     ]

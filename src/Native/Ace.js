@@ -40,7 +40,7 @@ function emptyModel() {
 		theme: null,
 		mode: null,
 		value: null,
-		_ace_ref_: null,
+		shared: null,
 	};
 }
 
@@ -85,15 +85,22 @@ var implementation = {
 // to tree later. Information about parent isn't available here.
 //
 function render(model) {
+	var shared = {
+		// Shared reference to an editor instance
+		editor: null,
+		// Skip next flag to prevent self-updates (much of them can drop typed symbols)
+		skipNext: false,
+	};
 	var div = document.createElement('div');
 	// TODO It replaces class
 	div.setAttribute("class", "elm-ace");
 
 	var editor = ace.edit(div);
+	shared.editor = editor;
 	editor.$blockScrolling = Infinity; // won't use deprecated
 	editor.getSession().setValue(model.value || "");
-	var dummy = emptyModel()
-	dummy._ace_ref_ = editor;
+	var dummy = emptyModel();
+	dummy.shared = shared;
 	// It uses editor instance of prev and copy it to new
 	diff({ model: dummy }, { model: model })
 
@@ -105,13 +112,14 @@ function render(model) {
 		div.value = new_source;
 		var event = new Event('AceSourceChange');
 		// Infinite loops are impossible, bacause Elm never calls `diff` inside handlers
+		shared.skipNext = true;
 		div.dispatchEvent(event);
 		div.value = null;
 	};
 
 	// Add debounce, because "change" event is extremelly often
 	// and value of Ace and model can be in different state
-	editor.on("change", debounced(changer, 300, false));
+	editor.on("change", debounced(changer, 150, false));
 
 	return div;
 }
@@ -120,8 +128,8 @@ function render(model) {
 function diff(prev, next) {
 	var pm = prev.model;
 	var nm = next.model;
-	// Keep reference to editor
-	var editor = pm._ace_ref_;
+	var shared = pm.shared;
+	var editor = shared.editor;
 	var session = editor.getSession();
 
 	if (pm.theme != nm.theme) {
@@ -132,14 +140,16 @@ function diff(prev, next) {
 		session.setMode("ace/mode/" + nm.mode);
 	}
 
-	if (nm.value != editor.getValue()) {
+	if (!shared.skipNext && nm.value != editor.getValue()) {
 		var pos = editor.getCursorPositionScreen();
 		if (nm.value != null) {
 			editor.setValue(nm.value, pos);
 		}
 	}
 
-	next.model._ace_ref_ = editor;
+	// Keep reference to shared state
+	shared.skipNext = false;
+	nm.shared = shared;
 
 	// It's not necessary to use patches, because Ace do changes itself
 	// But It usesd to inform Ace about changes
