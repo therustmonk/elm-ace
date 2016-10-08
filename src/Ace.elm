@@ -6,7 +6,7 @@ module Ace exposing (..)
 @docs toHtml
 
 # Ace's Attributes
-@docs theme, mode, value
+@docs theme, mode, value, highlightActiveLine, showPrintMargin, useSoftTabs
 
 # Ace's Events
 @docs onSourceChange
@@ -29,6 +29,7 @@ theme : String -> Attribute msg
 theme val =
     Attributes.property "AceTheme" (JE.string val)
 
+
 {-| Attribute to set the mode to Ace.
 
     Ace.toHtml [ Ace.mode "lua" ] []
@@ -36,6 +37,7 @@ theme val =
 mode : String -> Attribute msg
 mode val =
     Attributes.property "AceMode" (JE.string val)
+
 
 {-| Attribute to set initial value or to update current value of Ace.
 
@@ -45,6 +47,34 @@ value : String -> Attribute msg
 value val =
     Attributes.property "AceValue" (JE.string val)
 
+
+{-| Attribute to set whether to show the print margin or not.
+
+    Ace.toHtml [ Ace.showPrintMargin false ] []
+-}
+showPrintMargin : Bool -> Attribute msg
+showPrintMargin val =
+    Attributes.property "AceShowPrintMargin" (JE.bool val)
+
+
+{-| Attribute to set whether to highlight the active line or not.
+
+    Ace.toHtml [ Ace.highlightActiveLine false ] []
+-}
+highlightActiveLine : Bool -> Attribute msg
+highlightActiveLine val =
+    Attributes.property "AceHighlightActiveLine" (JE.bool val)
+
+
+{-| Attribute to set whether to use soft tabs or not.
+
+    Ace.toHtml [ Ace.useSoftTabs false ] []
+-}
+useSoftTabs : Bool -> Attribute msg
+useSoftTabs val =
+    Attributes.property "AceUseSoftTabs" (JE.bool val)
+
+
 {-| Values changes listener. It used to get notifications about changes made by user.
 
     Ace.toHtml [ Ace.onSourceChange model.data ] []
@@ -52,6 +82,7 @@ value val =
 onSourceChange : (String -> msg) -> Attribute msg
 onSourceChange tagger =
     Events.on "AceSourceChange" (JD.map tagger Events.targetValue)
+
 
 {-| Creates `Html` instance with Ace attached to it.
 

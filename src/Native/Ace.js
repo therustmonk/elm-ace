@@ -41,6 +41,9 @@ function emptyModel() {
 		mode: null,
 		value: null,
 		shared: null,
+		showPrintMargin: true,
+		highlightActiveLine: true,
+		useSoftTabs: true,
 	};
 }
 
@@ -59,6 +62,16 @@ function extractModel(factList) {
 			case "AceValue":
 				model.value = payload.value;
 				break;
+			case "AceShowPrintMargin":
+				model.showPrintMargin = payload.showPrintMargin;
+				break;
+			case "AceHighlightActiveLine":
+				model.highlightActiveLine = payload.highlightActiveLine;
+				break;
+			case "AceUseSoftTabs":
+				model.useSoftTabs = payload.useSoftTabs;
+				break;
+
 		}
 		current = current._1;
 	}
@@ -97,8 +110,13 @@ function render(model) {
 
 	var editor = ace.edit(div);
 	shared.editor = editor;
+
 	editor.$blockScrolling = Infinity; // won't use deprecated
+	editor.setShowPrintMargin(model.showPrintMargin);
+	editor.setHighlightActiveLine(model.highlightActiveLine);
+	editor.getSession().setUseSoftTabs(model.useSoftTabs);
 	editor.getSession().setValue(model.value || "");
+
 	var dummy = emptyModel();
 	dummy.shared = shared;
 	// It uses editor instance of prev and copy it to new
