@@ -66,13 +66,13 @@ function extractModel(factList) {
 				model.value = payload.value;
 				break;
 			case "AceShowPrintMargin":
-				model.showPrintMargin = payload.showPrintMargin;
+				model.showPrintMargin = payload.value;
 				break;
 			case "AceHighlightActiveLine":
-				model.highlightActiveLine = payload.highlightActiveLine;
+				model.highlightActiveLine = payload.value;
 				break;
 			case "AceUseSoftTabs":
-				model.useSoftTabs = payload.useSoftTabs;
+				model.useSoftTabs = payload.value;
 			case "AceReadOnly":
 				model.readOnly = payload.value
 				break;
