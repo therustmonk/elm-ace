@@ -73,6 +73,7 @@ function extractModel(factList) {
 				break;
 			case "AceUseSoftTabs":
 				model.useSoftTabs = payload.value;
+				break;
 			case "AceReadOnly":
 				model.readOnly = payload.value
 				break;
@@ -81,6 +82,7 @@ function extractModel(factList) {
 				break;
 			case "AceShowGutter":
 				model.showGutter = payload.value
+				break;
 
 		}
 		current = current._1;
