@@ -30,6 +30,15 @@ theme val =
     Attributes.property "AceTheme" (JE.string val)
 
 
+{-| Attribute to set editor in readonly.
+
+    Ace.toHtml [ Ace.readOnly true ] []
+-}
+readOnly : Bool -> Attribute msg
+readOnly val =
+    Attributes.property "AceReadOnly" (JE.bool val)
+
+
 {-| Attribute to set the mode to Ace.
 
     Ace.toHtml [ Ace.mode "lua" ] []
@@ -55,6 +64,24 @@ value val =
 showPrintMargin : Bool -> Attribute msg
 showPrintMargin val =
     Attributes.property "AceShowPrintMargin" (JE.bool val)
+
+
+{-| Attribute to set whether show cursor or not
+
+    Ace.toHtml [ Ace.showCursor false ] []
+-}
+showCursor : Bool -> Attribute msg
+showCursor val =
+    Attributes.property "AceShowCursor" (JE.bool val)
+
+
+{-| Attribute to set whether to show gutter or not.
+
+    Ace.toHtml [ Ace.showGutter false ] []
+-}
+showGutter : Bool -> Attribute msg
+showGutter val =
+    Attributes.property "AceShowGutter" (JE.bool val)
 
 
 {-| Attribute to set whether to highlight the active line or not.

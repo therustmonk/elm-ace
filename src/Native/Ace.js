@@ -44,6 +44,9 @@ function emptyModel() {
 		showPrintMargin: true,
 		highlightActiveLine: true,
 		useSoftTabs: true,
+		readOnly: false,
+		showCursor: true,
+		showGutter: true
 	};
 }
 
@@ -70,7 +73,14 @@ function extractModel(factList) {
 				break;
 			case "AceUseSoftTabs":
 				model.useSoftTabs = payload.useSoftTabs;
+			case "AceReadOnly":
+				model.readOnly = payload.value
 				break;
+			case "AceShowCursor":
+				model.showCursor = payload.value
+				break;
+			case "AceShowGutter":
+				model.showGutter = payload.value
 
 		}
 		current = current._1;
@@ -112,11 +122,16 @@ function render(model) {
 	shared.editor = editor;
 
 	editor.$blockScrolling = Infinity; // won't use deprecated
-	editor.setShowPrintMargin(model.showPrintMargin);
-	editor.setHighlightActiveLine(model.highlightActiveLine);
+	editor.setOptions({
+		showPrintMargin: model.showPrintMargin,
+		highlightActiveLine: model.highlightActiveLine,
+		readOnly: model.readOnly,
+		showGutter: model.showGutter
+	});
+	if (!model.showCursor)
+		editor.renderer.$cursorLayer.element.style.display = "none"
 	editor.getSession().setUseSoftTabs(model.useSoftTabs);
 	editor.getSession().setValue(model.value || "");
-
 	var dummy = emptyModel();
 	dummy.shared = shared;
 	// It uses editor instance of prev and copy it to new
