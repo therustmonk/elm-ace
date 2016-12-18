@@ -1,5 +1,5 @@
 {
-    "version": "1.1.0",
+    "version": "2.1.1",
     "summary": "Ace editor component",
     "repository": "https://github.com/DenisKolodin/elm-ace.git",
     "license": "BSD3",
@@ -11,9 +11,9 @@
     ],
     "native-modules": true,
     "dependencies": {
-        "elm-lang/core": "4.0.0 <= v < 5.0.0",
-        "elm-lang/html": "1.0.0 <= v < 2.0.0",
-        "elm-lang/virtual-dom": "1.1.0 <= v < 2.0.0"
+        "elm-lang/core": "5.0.0 <= v < 6.0.0",
+        "elm-lang/html": "2.0.0 <= v < 3.0.0",
+        "elm-lang/virtual-dom": "2.0.2 <= v < 3.0.0"
     },
-    "elm-version": "0.17.0 <= v < 0.18.0"
+    "elm-version": "0.18.0 <= v < 0.19.0"
 }

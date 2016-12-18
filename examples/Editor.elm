@@ -2,12 +2,12 @@
 -}
 
 import Html exposing (..)
-import Html.App as App
+import Html
 import Html.Events exposing (..)
 import Ace
 
 main =
-  App.program
+  Html.program
     { init = init
     , subscriptions = subscriptions
     , update = update
