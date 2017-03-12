@@ -1,5 +1,5 @@
 {
-    "version": "2.1.1",
+    "version": "2.1.2",
     "summary": "Ace editor component",
     "repository": "https://github.com/DenisKolodin/elm-ace.git",
     "license": "BSD3",
