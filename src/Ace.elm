@@ -6,7 +6,7 @@ module Ace exposing (..)
 @docs toHtml
 
 # Ace's Attributes
-@docs theme, mode, value, highlightActiveLine, showPrintMargin, useSoftTabs
+@docs theme, readOnly, mode, value, highlightActiveLine, showPrintMargin, showCursor, showGutter, useSoftTabs
 
 # Ace's Events
 @docs onSourceChange
