@@ -77,13 +77,13 @@ function extractModel(factList) {
 				model.useSoftTabs = payload.value;
 				break;
 			case "AceReadOnly":
-				model.readOnly = payload.value
+				model.readOnly = payload.value;
 				break;
 			case "AceShowCursor":
-				model.showCursor = payload.value
+				model.showCursor = payload.value;
 				break;
 			case "AceShowGutter":
-				model.showGutter = payload.value
+				model.showGutter = payload.value;
 				break;
 			case "AceEnableBasicAutocompletion":
 				model.enableBasicAutocompletion = payload.value;

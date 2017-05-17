@@ -6,7 +6,9 @@ module Ace exposing (..)
 @docs toHtml
 
 # Ace's Attributes
-@docs theme, readOnly, mode, value, highlightActiveLine, showPrintMargin, showCursor, showGutter, useSoftTabs, enableBasicAutocompletion, enableLiveAutocompletion, enableSnippets, extensions
+@docs theme, readOnly, mode, value, highlightActiveLine
+@docs showPrintMargin, showCursor, showGutter, useSoftTabs
+@docs enableBasicAutocompletion, enableLiveAutocompletion, enableSnippets, extensions
 
 # Ace's Events
 @docs onSourceChange
