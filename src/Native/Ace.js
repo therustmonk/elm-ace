@@ -55,6 +55,7 @@ function extractModel(factList) {
 	var current = factList;
 	while (current.ctor != "[]") {
 		var payload = current._0;
+		// TODO Consider to use map of functions instead of large switch/case
 		switch (payload.key) {
 			case "AceTheme":
 				model.theme = payload.value;
@@ -88,6 +89,9 @@ function extractModel(factList) {
 				break;
 			case "AceEnableLiveAutocompletion":
 				model.enableLiveAutocompletion = payload.value;
+				break;
+			case "AceEnableSnippets":
+				model.enableSnippets = payload.value;
 				break;
 
 		}
