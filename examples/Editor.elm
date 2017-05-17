@@ -72,6 +72,7 @@ view model =
       , Ace.mode "lua"
       , Ace.theme model.theme
       , Ace.enableBasicAutocompletion True
+      , Ace.enableLiveAutocompletion True
       ] []
     , Html.button [ onClick (SetThemeTo "monokai") ] [ Html.text "Set 'monokai' theme" ]
     , Html.button [ onClick (SetThemeTo "cobalt") ] [ Html.text "Set 'cobalt' theme" ]

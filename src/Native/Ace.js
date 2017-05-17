@@ -86,6 +86,9 @@ function extractModel(factList) {
 			case "AceEnableBasicAutocompletion":
 				model.enableBasicAutocompletion = payload.value;
 				break;
+			case "AceEnableLiveAutocompletion":
+				model.enableLiveAutocompletion = payload.value;
+				break;
 
 		}
 		current = current._1;
