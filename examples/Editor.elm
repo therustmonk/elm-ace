@@ -74,6 +74,7 @@ view model =
       , Ace.enableBasicAutocompletion True
       , Ace.enableLiveAutocompletion True
       , Ace.enableSnippets True
+      , Ace.extensions [ "language_tools" ]
       ] []
     , Html.button [ onClick (SetThemeTo "monokai") ] [ Html.text "Set 'monokai' theme" ]
     , Html.button [ onClick (SetThemeTo "cobalt") ] [ Html.text "Set 'cobalt' theme" ]

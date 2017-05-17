@@ -6,7 +6,7 @@ module Ace exposing (..)
 @docs toHtml
 
 # Ace's Attributes
-@docs theme, readOnly, mode, value, highlightActiveLine, showPrintMargin, showCursor, showGutter, useSoftTabs, enableBasicAutocompletion, enableLiveAutocompletion, enableSnippets
+@docs theme, readOnly, mode, value, highlightActiveLine, showPrintMargin, showCursor, showGutter, useSoftTabs, enableBasicAutocompletion, enableLiveAutocompletion, enableSnippets, extensions
 
 # Ace's Events
 @docs onSourceChange
@@ -127,6 +127,15 @@ enableLiveAutocompletion val =
 enableSnippets : Bool -> Attribute msg
 enableSnippets val =
     Attributes.property "AceEnableSnippets" (JE.bool val)
+
+
+{-| Set list of extensions for ace.
+
+    Ace.toHtml [ Ace.extensions [ "language_tools" ] ] []
+-}
+extensions : List String -> Attribute msg
+extensions exts =
+    Attributes.property "AceExtensions" (List.map JE.string exts |> JE.list)
 
 
 {-| Values changes listener. It used to get notifications about changes made by user.

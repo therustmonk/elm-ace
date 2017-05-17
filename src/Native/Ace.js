@@ -46,7 +46,8 @@ function emptyModel() {
 		useSoftTabs: true,
 		readOnly: false,
 		showCursor: true,
-		showGutter: true
+		showGutter: true,
+		extensions: [],
 	};
 }
 
@@ -93,6 +94,9 @@ function extractModel(factList) {
 			case "AceEnableSnippets":
 				model.enableSnippets = payload.value;
 				break;
+			case "AceExtensions":
+				model.extensions = payload.value;
+				break;
 
 		}
 		current = current._1;
@@ -130,6 +134,9 @@ function render(model) {
 	// TODO It replaces class
 	div.setAttribute("class", "elm-ace");
 
+	for (var ext in model.extensions) {
+		ace.require("ace/ext/" + ext);
+	}
 	var editor = ace.edit(div);
 	shared.editor = editor;
 
