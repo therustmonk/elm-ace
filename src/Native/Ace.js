@@ -83,6 +83,9 @@ function extractModel(factList) {
 			case "AceShowGutter":
 				model.showGutter = payload.value
 				break;
+			case "AceEnableBasicAutocompletion":
+				model.enableBasicAutocompletion = payload.value;
+				break;
 
 		}
 		current = current._1;
