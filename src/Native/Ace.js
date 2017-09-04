@@ -43,6 +43,7 @@ function emptyModel() {
 		shared: null,
 		showPrintMargin: true,
 		highlightActiveLine: true,
+		tabSize: 4,
 		useSoftTabs: true,
 		readOnly: false,
 		showCursor: true,
@@ -72,6 +73,9 @@ function extractModel(factList) {
 				break;
 			case "AceHighlightActiveLine":
 				model.highlightActiveLine = payload.value;
+				break;
+			case "AceTabSize":
+				model.tabSize = payload.value;
 				break;
 			case "AceUseSoftTabs":
 				model.useSoftTabs = payload.value;
