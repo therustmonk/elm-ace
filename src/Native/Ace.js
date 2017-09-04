@@ -6,23 +6,23 @@ var _DenisKolodin$elm_ace$Native_Ace = function() {
 // Source: http://unscriptable.com/2009/03/20/debouncing-javascript-methods/
 var debounced = function (func, threshold, execAsap) {
 
-	var timeout;
+    var timeout;
 
-	return function debounced () {
-		var obj = this, args = arguments;
-		function delayed () {
-			if (!execAsap)
-				func.apply(obj, args);
-			timeout = null;
-		};
+    return function debounced () {
+        var obj = this, args = arguments;
+        function delayed () {
+            if (!execAsap)
+                func.apply(obj, args);
+            timeout = null;
+        };
 
-		if (timeout)
-			clearTimeout(timeout);
-		else if (execAsap)
-			func.apply(obj, args);
+        if (timeout)
+            clearTimeout(timeout);
+        else if (execAsap)
+            func.apply(obj, args);
 
-		timeout = setTimeout(delayed, threshold || 100);
-	};
+        timeout = setTimeout(delayed, threshold || 100);
+    };
 
 }
 
@@ -30,89 +30,89 @@ var debounced = function (func, threshold, execAsap) {
 
 // `toHtml` called everytime component appeared or model changed
 function toHtml(factList, skipChildren) {
-	var model = extractModel(factList);
-	// Ace event's uses this facts to dispatch custom event
-	return _elm_lang$virtual_dom$Native_VirtualDom.custom(factList, model, implementation);
+    var model = extractModel(factList);
+    // Ace event's uses this facts to dispatch custom event
+    return _elm_lang$virtual_dom$Native_VirtualDom.custom(factList, model, implementation);
 }
 
 function emptyModel() {
-	return {
-		theme: null,
-		mode: null,
-		value: null,
-		shared: null,
-		showPrintMargin: true,
-		highlightActiveLine: true,
-		tabSize: 4,
-		useSoftTabs: true,
-		readOnly: false,
-		showCursor: true,
-		showGutter: true,
-		extensions: [],
-	};
+    return {
+        theme: null,
+        mode: null,
+        value: null,
+        shared: null,
+        showPrintMargin: true,
+        highlightActiveLine: true,
+        tabSize: 4,
+        useSoftTabs: true,
+        readOnly: false,
+        showCursor: true,
+        showGutter: true,
+        extensions: [],
+    };
 }
 
 function extractModel(factList) {
-	var model = emptyModel();
-	var current = factList;
-	while (current.ctor != "[]") {
-		var payload = current._0;
-		// TODO Consider to use map of functions instead of large switch/case
-		switch (payload.key) {
-			case "AceTheme":
-				model.theme = payload.value;
-				break;
-			case "AceMode":
-				model.mode = payload.value;
-				break;
-			case "AceValue":
-				model.value = payload.value;
-				break;
-			case "AceShowPrintMargin":
-				model.showPrintMargin = payload.value;
-				break;
-			case "AceHighlightActiveLine":
-				model.highlightActiveLine = payload.value;
-				break;
-			case "AceTabSize":
-				model.tabSize = payload.value;
-				break;
-			case "AceUseSoftTabs":
-				model.useSoftTabs = payload.value;
-				break;
-			case "AceReadOnly":
-				model.readOnly = payload.value;
-				break;
-			case "AceShowCursor":
-				model.showCursor = payload.value;
-				break;
-			case "AceShowGutter":
-				model.showGutter = payload.value;
-				break;
-			case "AceEnableBasicAutocompletion":
-				model.enableBasicAutocompletion = payload.value;
-				break;
-			case "AceEnableLiveAutocompletion":
-				model.enableLiveAutocompletion = payload.value;
-				break;
-			case "AceEnableSnippets":
-				model.enableSnippets = payload.value;
-				break;
-			case "AceExtensions":
-				model.extensions = payload.value;
-				break;
+    var model = emptyModel();
+    var current = factList;
+    while (current.ctor != "[]") {
+        var payload = current._0;
+        // TODO Consider to use map of functions instead of large switch/case
+        switch (payload.key) {
+            case "AceTheme":
+                model.theme = payload.value;
+                break;
+            case "AceMode":
+                model.mode = payload.value;
+                break;
+            case "AceValue":
+                model.value = payload.value;
+                break;
+            case "AceShowPrintMargin":
+                model.showPrintMargin = payload.value;
+                break;
+            case "AceHighlightActiveLine":
+                model.highlightActiveLine = payload.value;
+                break;
+            case "AceTabSize":
+                model.tabSize = payload.value;
+                break;
+            case "AceUseSoftTabs":
+                model.useSoftTabs = payload.value;
+                break;
+            case "AceReadOnly":
+                model.readOnly = payload.value;
+                break;
+            case "AceShowCursor":
+                model.showCursor = payload.value;
+                break;
+            case "AceShowGutter":
+                model.showGutter = payload.value;
+                break;
+            case "AceEnableBasicAutocompletion":
+                model.enableBasicAutocompletion = payload.value;
+                break;
+            case "AceEnableLiveAutocompletion":
+                model.enableLiveAutocompletion = payload.value;
+                break;
+            case "AceEnableSnippets":
+                model.enableSnippets = payload.value;
+                break;
+            case "AceExtensions":
+                model.extensions = payload.value;
+                break;
 
-		}
-		current = current._1;
-	}
-	return model;
+        }
+        current = current._1;
+    }
+    return model;
 }
 
 // WIDGET IMPLEMENTATION
 
 var implementation = {
-	render: render,
-	diff: diff
+    render: render,
+    diff: diff
 };
 
 //
@@ -128,92 +128,93 @@ var implementation = {
 // to tree later. Information about parent isn't available here.
 //
 function render(model) {
-	var shared = {
-		// Shared reference to an editor instance
-		editor: null,
-		// Skip next flag to prevent self-updates (much of them can drop typed symbols)
-		skipNext: false,
-	};
-	var div = document.createElement('div');
-	// TODO It replaces class
-	div.setAttribute("class", "elm-ace");
+    var shared = {
+        // Shared reference to an editor instance
+        editor: null,
+        // Skip next flag to prevent self-updates (much of them can drop typed symbols)
+        skipNext: false,
+    };
+    var div = document.createElement('div');
+    // TODO It replaces class
+    div.setAttribute("class", "elm-ace");
 
-	for (var ext in model.extensions) {
-		ace.require("ace/ext/" + ext);
-	}
-	var editor = ace.edit(div);
-	shared.editor = editor;
+    for (var ext in model.extensions) {
+        ace.require("ace/ext/" + ext);
+    }
+    var editor = ace.edit(div);
+    shared.editor = editor;
 
-	editor.$blockScrolling = Infinity; // won't use deprecated
-	editor.setOptions({
-		showPrintMargin: model.showPrintMargin,
-		highlightActiveLine: model.highlightActiveLine,
-		readOnly: model.readOnly,
-		showGutter: model.showGutter
-	});
-	if (!model.showCursor)
-		editor.renderer.$cursorLayer.element.style.display = "none"
-	editor.getSession().setUseSoftTabs(model.useSoftTabs);
-	editor.getSession().setValue(model.value || "");
-	var dummy = emptyModel();
-	dummy.shared = shared;
-	// It uses editor instance of prev and copy it to new
-	diff({ model: dummy }, { model: model })
+    editor.$blockScrolling = Infinity; // won't use deprecated
+    editor.setOptions({
+        showPrintMargin: model.showPrintMargin,
+        highlightActiveLine: model.highlightActiveLine,
+        readOnly: model.readOnly,
+        showGutter: model.showGutter
+    });
+    if (!model.showCursor)
+        editor.renderer.$cursorLayer.element.style.display = "none"
+    editor.getSession().setTabSize(model.tabSize);
+    editor.getSession().setUseSoftTabs(model.useSoftTabs);
+    editor.getSession().setValue(model.value || "");
+    var dummy = emptyModel();
+    dummy.shared = shared;
+    // It uses editor instance of prev and copy it to new
+    diff({ model: dummy }, { model: model })
 
-	// To resize automatically
-	editor.setAutoScrollEditorIntoView(true);
+    // To resize automatically
+    editor.setAutoScrollEditorIntoView(true);
 
-	var changer = function(_val) {
-		var new_source = editor.getSession().getValue();
-		div.value = new_source;
-		var event = new Event('AceSourceChange');
-		// Infinite loops are impossible, bacause Elm never calls `diff` inside handlers
-		shared.skipNext = true;
-		div.dispatchEvent(event);
-		div.value = null;
-	};
+    var changer = function(_val) {
+        var new_source = editor.getSession().getValue();
+        div.value = new_source;
+        var event = new Event('AceSourceChange');
+        // Infinite loops are impossible, bacause Elm never calls `diff` inside handlers
+        shared.skipNext = true;
+        div.dispatchEvent(event);
+        div.value = null;
+    };
 
-	// Add debounce, because "change" event is extremelly often
-	// and value of Ace and model can be in different state
-	editor.on("change", debounced(changer, 150, false));
+    // Add debounce, because "change" event is extremelly often
+    // and value of Ace and model can be in different state
+    editor.on("change", debounced(changer, 150, false));
 
-	return div;
+    return div;
 }
 
 // `diff` called everytime view updates, but you are still on the same page
 function diff(prev, next) {
-	var pm = prev.model;
-	var nm = next.model;
-	var shared = pm.shared;
-	var editor = shared.editor;
-	var session = editor.getSession();
+    var pm = prev.model;
+    var nm = next.model;
+    var shared = pm.shared;
+    var editor = shared.editor;
+    var session = editor.getSession();
 
-	if (pm.theme != nm.theme) {
-		editor.setTheme("ace/theme/" + nm.theme);
-	}
+    if (pm.theme != nm.theme) {
+        editor.setTheme("ace/theme/" + nm.theme);
+    }
 
-	if (pm.mode != nm.mode) {
-		session.setMode("ace/mode/" + nm.mode);
-	}
+    if (pm.mode != nm.mode) {
+        session.setMode("ace/mode/" + nm.mode);
+    }
 
-	if (!shared.skipNext && nm.value != editor.getValue()) {
-		var pos = editor.getCursorPositionScreen();
-		if (nm.value != null) {
-			editor.setValue(nm.value, pos);
-		}
-	}
+    if (!shared.skipNext && nm.value != editor.getValue()) {
+        var pos = editor.getCursorPositionScreen();
+        if (nm.value != null) {
+            editor.setValue(nm.value, pos);
+        }
+    }
 
-	// Keep reference to shared state
-	shared.skipNext = false;
-	nm.shared = shared;
+    // Keep reference to shared state
+    shared.skipNext = false;
+    nm.shared = shared;
 
-	// It's not necessary to use patches, because Ace do changes itself
-	// But It usesd to inform Ace about changes
-	return null;
+    // It's not necessary to use patches, because Ace do changes itself
+    // But It usesd to inform Ace about changes
+    return null;
 }
 
 return {
-	toHtml: F2(toHtml),
+    toHtml: F2(toHtml),
 };
 
 }();
