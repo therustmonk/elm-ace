@@ -11,7 +11,7 @@ module Ace exposing (..)
 # Ace's Attributes
 
 @docs theme, readOnly, mode, value, highlightActiveLine
-@docs showPrintMargin, showCursor, showGutter, tabSize, useSoftTabs
+@docs showPrintMargin, showCursor, showGutter, tabSize, useSoftTabs, useWrapMode
 @docs enableBasicAutocompletion, enableLiveAutocompletion, enableSnippets, extensions
 
 
@@ -127,6 +127,16 @@ tabSize val =
 useSoftTabs : Bool -> Attribute msg
 useSoftTabs val =
     Attributes.property "AceUseSoftTabs" (JE.bool val)
+
+
+{-| Attribute to set whether to use soft tabs or not.
+
+    Ace.toHtml [ Ace.useWrapMode false ] []
+
+-}
+useWrapMode : Bool -> Attribute msg
+useWrapMode val =
+    Attributes.property "AceUseWrapMode" (JE.bool val)
 
 
 {-| Attribute to set autocompletion option.

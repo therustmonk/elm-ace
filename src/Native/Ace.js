@@ -45,6 +45,7 @@ function emptyModel() {
         highlightActiveLine: true,
         tabSize: 4,
         useSoftTabs: true,
+        useWrapMode: false,
         readOnly: false,
         showCursor: true,
         showGutter: true,
@@ -79,6 +80,9 @@ function extractModel(factList) {
                 break;
             case "AceUseSoftTabs":
                 model.useSoftTabs = payload.value;
+                break;
+            case "AceUseWrapMode":
+                model.useWrapMode = payload.value;
                 break;
             case "AceReadOnly":
                 model.readOnly = payload.value;
@@ -155,6 +159,7 @@ function render(model) {
         editor.renderer.$cursorLayer.element.style.display = "none"
     editor.getSession().setTabSize(model.tabSize);
     editor.getSession().setUseSoftTabs(model.useSoftTabs);
+    editor.getSession().setUseWrapMode(model.useWrapMode);
     editor.getSession().setValue(model.value || "");
     var dummy = emptyModel();
     dummy.shared = shared;
