@@ -61,7 +61,7 @@ mode val =
 
 {-| Attribute to set initial value or to update current value of Ace.
 
-    Ace.toHtml [ Ace.value "lua" ] []
+    Ace.toHtml [ Ace.value "-- It's a source!\nlocal x = 1" ] []
 
 -}
 value : String -> Attribute msg
@@ -111,7 +111,7 @@ highlightActiveLine val =
 
 {-| Attribute to set whether to use soft tabs or not.
 
-    Ace.toHtml [ Ace.useSoftTabs false ] []
+    Ace.toHtml [ Ace.tabSize 4 ] []
 
 -}
 tabSize : Int -> Attribute msg
