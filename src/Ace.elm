@@ -109,7 +109,7 @@ highlightActiveLine val =
     Attributes.property "AceHighlightActiveLine" (JE.bool val)
 
 
-{-| Attribute to set whether to use soft tabs or not.
+{-| Attribute to set the tab size.
 
     Ace.toHtml [ Ace.tabSize 4 ] []
 
@@ -129,7 +129,7 @@ useSoftTabs val =
     Attributes.property "AceUseSoftTabs" (JE.bool val)
 
 
-{-| Attribute to set whether to use soft tabs or not.
+{-| Attribute to set whether to use wrap mode.
 
     Ace.toHtml [ Ace.useWrapMode false ] []
 
