@@ -2,30 +2,37 @@ module Ace exposing (..)
 
 {-| A library to use Ace editor with Elm.
 
+
 # Editor
+
 @docs toHtml
 
+
 # Ace's Attributes
+
 @docs theme, readOnly, mode, value, highlightActiveLine
-@docs showPrintMargin, showCursor, showGutter, tabSize, useSoftTabs
+@docs showPrintMargin, showCursor, showGutter, tabSize, useSoftTabs, useWrapMode
 @docs enableBasicAutocompletion, enableLiveAutocompletion, enableSnippets, extensions
 
+
 # Ace's Events
+
 @docs onSourceChange
 
 -}
 
-import Html exposing (Html, Attribute)
+import Html exposing (Attribute, Html)
 import Html.Attributes as Attributes
 import Html.Events as Events
-import Json.Encode as JE
 import Json.Decode as JD
+import Json.Encode as JE
 import Native.Ace
 
 
 {-| Attribute to set the theme to Ace.
 
     Ace.toHtml [ Ace.theme "monokai" ] []
+
 -}
 theme : String -> Attribute msg
 theme val =
@@ -35,6 +42,7 @@ theme val =
 {-| Attribute to set editor in readonly.
 
     Ace.toHtml [ Ace.readOnly true ] []
+
 -}
 readOnly : Bool -> Attribute msg
 readOnly val =
@@ -44,6 +52,7 @@ readOnly val =
 {-| Attribute to set the mode to Ace.
 
     Ace.toHtml [ Ace.mode "lua" ] []
+
 -}
 mode : String -> Attribute msg
 mode val =
@@ -52,7 +61,8 @@ mode val =
 
 {-| Attribute to set initial value or to update current value of Ace.
 
-    Ace.toHtml [ Ace.value "lua" ] []
+    Ace.toHtml [ Ace.value "-- It's a source!\nlocal x = 1" ] []
+
 -}
 value : String -> Attribute msg
 value val =
@@ -62,6 +72,7 @@ value val =
 {-| Attribute to set whether to show the print margin or not.
 
     Ace.toHtml [ Ace.showPrintMargin false ] []
+
 -}
 showPrintMargin : Bool -> Attribute msg
 showPrintMargin val =
@@ -71,6 +82,7 @@ showPrintMargin val =
 {-| Attribute to set whether show cursor or not
 
     Ace.toHtml [ Ace.showCursor false ] []
+
 -}
 showCursor : Bool -> Attribute msg
 showCursor val =
@@ -80,6 +92,7 @@ showCursor val =
 {-| Attribute to set whether to show gutter or not.
 
     Ace.toHtml [ Ace.showGutter false ] []
+
 -}
 showGutter : Bool -> Attribute msg
 showGutter val =
@@ -89,15 +102,17 @@ showGutter val =
 {-| Attribute to set whether to highlight the active line or not.
 
     Ace.toHtml [ Ace.highlightActiveLine false ] []
+
 -}
 highlightActiveLine : Bool -> Attribute msg
 highlightActiveLine val =
     Attributes.property "AceHighlightActiveLine" (JE.bool val)
 
 
-{-| Attribute to set whether to use soft tabs or not.
+{-| Attribute to set the tab size.
 
-    Ace.toHtml [ Ace.useSoftTabs false ] []
+    Ace.toHtml [ Ace.tabSize 4 ] []
+
 -}
 tabSize : Int -> Attribute msg
 tabSize val =
@@ -107,15 +122,27 @@ tabSize val =
 {-| Attribute to set whether to use soft tabs or not.
 
     Ace.toHtml [ Ace.useSoftTabs false ] []
+
 -}
 useSoftTabs : Bool -> Attribute msg
 useSoftTabs val =
     Attributes.property "AceUseSoftTabs" (JE.bool val)
 
 
+{-| Attribute to set whether to use wrap mode.
+
+    Ace.toHtml [ Ace.useWrapMode false ] []
+
+-}
+useWrapMode : Bool -> Attribute msg
+useWrapMode val =
+    Attributes.property "AceUseWrapMode" (JE.bool val)
+
+
 {-| Attribute to set autocompletion option.
 
     Ace.toHtml [ Ace.enableBasicAutocompletion true ] []
+
 -}
 enableBasicAutocompletion : Bool -> Attribute msg
 enableBasicAutocompletion val =
@@ -125,6 +152,7 @@ enableBasicAutocompletion val =
 {-| Attribute to set live autocompletion option.
 
     Ace.toHtml [ Ace.enableLiveAutocompletion true ] []
+
 -}
 enableLiveAutocompletion : Bool -> Attribute msg
 enableLiveAutocompletion val =
@@ -134,6 +162,7 @@ enableLiveAutocompletion val =
 {-| Attribute to activate snippets.
 
     Ace.toHtml [ Ace.enableSnippets true ] []
+
 -}
 enableSnippets : Bool -> Attribute msg
 enableSnippets val =
@@ -143,6 +172,7 @@ enableSnippets val =
 {-| Set list of extensions for ace.
 
     Ace.toHtml [ Ace.extensions [ "language_tools" ] ] []
+
 -}
 extensions : List String -> Attribute msg
 extensions exts =
@@ -152,6 +182,7 @@ extensions exts =
 {-| Values changes listener. It used to get notifications about changes made by user.
 
     Ace.toHtml [ Ace.onSourceChange model.data ] []
+
 -}
 onSourceChange : (String -> msg) -> Attribute msg
 onSourceChange tagger =
@@ -161,6 +192,7 @@ onSourceChange tagger =
 {-| Creates `Html` instance with Ace attached to it.
 
     Ace.toHtml [] []
+
 -}
 toHtml : List (Attribute msg) -> List (Html msg) -> Html msg
 toHtml =
