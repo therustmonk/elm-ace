@@ -11,7 +11,7 @@ module Ace exposing (..)
 # Ace's Attributes
 
 @docs theme, readOnly, mode, value, highlightActiveLine
-@docs showPrintMargin, showCursor, showGutter, tabSize, useSoftTabs, useWrapMode
+@docs showPrintMargin, showCursor, showGutter, tabSize, useSoftTabs, useWrapMode, annotations
 @docs enableBasicAutocompletion, enableLiveAutocompletion, enableSnippets, extensions
 
 
@@ -57,6 +57,16 @@ readOnly val =
 mode : String -> Attribute msg
 mode val =
     Attributes.property "AceMode" (JE.string val)
+
+
+{-| Attribute to set the mode to Ace.
+
+    Ace.toHtml [ Ace.annotations "[]" ] []
+
+-}
+annotations : String -> Attribute msg
+annotations val =
+    Attributes.property "AceAnnotations" (JE.string val)
 
 
 {-| Attribute to set initial value or to update current value of Ace.
