@@ -207,7 +207,12 @@ function diff(prev, next) {
     }
 
     if (pm.annotations != nm.annotations) {
-        session.setAnnotations(JSON.parse(nm.annotations));
+        try {
+            session.setAnnotations(JSON.parse(nm.annotations));
+        }
+        catch (e) { 
+            session.setAnnotations([]);
+        }
     }
 
     if (!shared.skipNext && nm.value != editor.getValue()) {
