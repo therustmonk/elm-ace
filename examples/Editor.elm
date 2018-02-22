@@ -24,6 +24,7 @@ main =
 type alias Model =
     { source : String
     , theme : String
+    , annotations : String
     }
 
 
@@ -33,7 +34,7 @@ blankSource =
 
 init : ( Model, Cmd Msg )
 init =
-    ( { source = blankSource, theme = "ambiance" }, Cmd.none )
+    ( { source = blankSource, theme = "ambiance", annotations = "[]" }, Cmd.none )
 
 
 
@@ -43,6 +44,8 @@ init =
 type Msg
     = UpdateSource String
     | SetThemeTo String
+    | AddAnnotation
+    | RemoveAnnotation
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -55,6 +58,12 @@ update msg model =
 
                 SetThemeTo theme ->
                     { model | theme = theme }
+                
+                AddAnnotation ->
+                    {model | annotations = "[{\"row\":1,\"column\":2,\"type\":\"error\",\"text\":\"Some error.\"}]"}
+
+                RemoveAnnotation ->
+                    {model | annotations = "[]"}
     in
     ( newModel, Cmd.none )
 
@@ -86,11 +95,14 @@ view model =
             , Ace.tabSize 2
             , Ace.useSoftTabs False
             , Ace.extensions [ "language_tools" ]
+            , Ace.annotations model.annotations
             ]
             []
         , Html.button [ onClick (SetThemeTo "monokai") ] [ Html.text "Set 'monokai' theme" ]
         , Html.button [ onClick (SetThemeTo "cobalt") ] [ Html.text "Set 'cobalt' theme" ]
         , Html.button [ onClick (SetThemeTo "ambiance") ] [ Html.text "Revert 'ambiance' theme" ]
         , Html.button [ onClick (UpdateSource blankSource) ] [ Html.text "Reset source" ]
+        , Html.button [ onClick AddAnnotation ] [ Html.text "Add Annotation" ]
+        , Html.button [ onClick RemoveAnnotation ] [ Html.text "Remove Annotations" ]
         , Html.text model.source
         ]

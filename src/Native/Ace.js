@@ -50,6 +50,7 @@ function emptyModel() {
         showCursor: true,
         showGutter: true,
         extensions: [],
+        annotations: null
     };
 }
 
@@ -104,6 +105,9 @@ function extractModel(factList) {
                 break;
             case "AceExtensions":
                 model.extensions = payload.value;
+                break;
+            case "AceAnnotations":
+                model.annotations = payload.value;
                 break;
 
         }
@@ -200,6 +204,15 @@ function diff(prev, next) {
 
     if (pm.mode != nm.mode) {
         session.setMode("ace/mode/" + nm.mode);
+    }
+
+    if (pm.annotations != nm.annotations) {
+        try {
+            session.setAnnotations(JSON.parse(nm.annotations));
+        }
+        catch (e) { 
+            session.setAnnotations([]);
+        }
     }
 
     if (!shared.skipNext && nm.value != editor.getValue()) {
